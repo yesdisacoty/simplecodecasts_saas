@@ -6,6 +6,13 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     
     if @contact.save 
+      name = params[:contact][:name]
+      email = params[:contact][:email]
+      body = params[:contact][:comments]
+    
+      #Calls the mailer file with class name "ContactMailer" - Look in that file and run contact.email function, then pass in parameters, and deliver using .deliver method
+      ContactMailer.contact_email(name, email, body).deliver
+      
       flash[:success] = 'Message sent'
       redirect_to new_contact_path
     else
