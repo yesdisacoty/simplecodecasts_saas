@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+  devise_for :models
   #Define all URLs in this file
   resources :contacts
   get '/about' => 'pages#about'
